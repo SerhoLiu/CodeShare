@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+  <title>{% block title %}{{ entry.title }}——{{ escape(handler.settings["sitename"]) }}{% end %}</title>
+{% block head %}
+  <link rel="stylesheet" href="{{ static_url("prettify.css") }}" type="text/css" />
+  <meta name="description" content="{{ entry.info[0:128] }}">
+{% end %}
+
+{% block body %}
+  <div class="entry">
+  <div class="codeinfo clearfix">
+    <div class="title">
+      <h2>Code：<a href="/{{ entry.slug }}">{{ entry.title }}</a></h2>
+    </div>
+    <div class="delete">
+      <span data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="label important">DElete</span></div>
+  </div>
+  <div class="body"><pre class="prettyprint linenums">{{ entry.code }}</pre></div>
+  <span class="label notice">Code info</span>
+  <blockquote>
+      <p>{{ entry.info }}<p>
+      <small>{{ entry.published.strftime('%Y-%m-%d %H:%M') }}</small>
+  </blockquote>
+  </div>
+{% if current_user %}
+<div class="admin"><a href="/admin/delete/{{ entry.slug }}">Delete</a></div>
+{% end %}
+
+<div id="modal-from-dom" class="modal hide fade">
+    <div class="modal-header">
+        <a href="#" class="close">&times;</a>
+        <h3>删除代码</h3>
+    </div>
+    <div class="modal-body">
+        <form action="/delete" method="post" class="compose">
+    <div class="clearfix">
+        <label for="xlInput3">管理密码</label>
+        <div class="input">
+          <input name="password" type="password" class="span3" />
+              <span class="help-block">
+                输入你的管理密码。
+              </span>
+        </div>
+    </div><!-- /clearfix -->
+          <input type="hidden" name="id" value="{{ entry.id }}"/>
+    </div>
+    {{ xsrf_form_html() }}
+    <div class="modal-footer">
+        <input type="submit" class="btn primary" value="提交删除">
+    </div>
+      </form>
+</div>
+{% end %}
+{% block bottom %}
+     <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+     <script type="text/javascript" src="{{ static_url("prettify.js")}}"></script>
+     <script type="text/javascript">$(document).ready(function(){prettyPrint();})</script>
+     <script src="{{static_url("bootstrap-modal.js")}}"> </script>
+{% end %}

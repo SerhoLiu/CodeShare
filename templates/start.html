@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+<title>{% block title %}基本设置——准备开始{% end %}</title>
+{% block body %}
+  <form action="/admin/start" method="post" class="compose">
+  <fieldset>
+  <legend>管理员注册</legend>
+          <div class="clearfix">
+            <label for="xlInput3">Email</label>
+            <div class="input">
+              <input name="email" type="text" class="span4" id="email" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">管理密码</label>
+            <div class="input">
+              <input name="password1" type="password" class="span4" id="pswd1" />
+              
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">重复密码</label>
+            <div class="input">
+              <input name="password2" type="password" class="span4" id="pswd2" />
+              
+            </div>
+          </div><!-- /clearfix -->
+       <div class="actions">
+            <input type="submit" class="btn primary" value="提交注册">
+          </div>
+       </fieldset>
+    </div>
+    {{ xsrf_form_html() }}
+  </form>
+{% end %}
+
+{% block bottom %}
+
+     <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+
+    $(function() {
+      $("input[name=title]").select();
+      $("form.compose").submit(function() {
+          var required = ["email","pswd1","pswd2"];
+          var form = $(this).get(0);
+          for (var i = 0; i < required.length; i++) {
+              if (!form[required[i]].value) {
+                  $(form[required[i]]).select();
+                  return false;
+              }
+          }
+          return true;
+      });
+    });
+
+  //]]>
+  </script>
+{% end %}
+

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+<title>{% block title %}管理员登录{% end %}</title>
+{% block body %}
+  <form action="/auth/login" method="post" class="compose">
+  <fieldset>
+    {{ msg if msg else ' '}}
+  <legend>管理员登录</legend>
+          <div class="clearfix">
+            <label for="xlInput3">Email</label>
+            <div class="input">
+              <input name="email" type="text" class="span4" id="email" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">管理密码</label>
+            <div class="input">
+              <input name="password" type="password" class="span4" id="pswd" />
+              
+            </div>
+          </div><!-- /clearfix -->
+       <div class="actions">
+            <input type="submit" class="btn primary" value="登录">
+          </div>
+       </fieldset>
+    </div>
+    {{ xsrf_form_html() }}
+  </form>
+{% end %}
+
+{% block bottom %}
+
+     <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+
+    $(function() {
+      $("input[name=title]").select();
+      $("form.compose").submit(function() {
+          var required = ["email","pswd"];
+          var form = $(this).get(0);
+          for (var i = 0; i < required.length; i++) {
+              if (!form[required[i]].value) {
+                  $(form[required[i]]).select();
+                  return false;
+              }
+          }
+          return true;
+      });
+    });
+
+  //]]>
+  </script>
+{% end %}
+

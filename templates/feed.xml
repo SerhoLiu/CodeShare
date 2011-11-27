@@ -1,0 +1,31 @@
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" version="2.0" encoding="utf-8">
+<channel>
+  <title>{{ escape(handler.settings["sitename"]) }}</title>
+  <atom:link href="http://{{ request.host }}/feed/" rel="self" type="application/rss+xml"/>
+  <link>http://{{ request.host }}/</link>
+  <description>A simple code share site runing SAE.</description>
+  {% set date_format = "%Y-%m-%dT%H:%M:%SZ" %}
+  {% if len(entries) > 0 %}
+    <updated>{{ max(e.updated for e in entries).strftime(date_format) }}</updated>
+  {% else %}
+    <updated>{{ datetime.datetime.utcnow().strftime(date_format) }}</updated>
+  {% end %}
+  <language>cn</language>
+  <sy:updatePeriod>hourly</sy:updatePeriod>
+  <sy:updateFrequency>1</sy:updateFrequency>
+  <generator>http://wordpress.org/?v=3.2.1</generator>
+  <author><name>{{ escape(handler.settings["sitename"]) }}</name></author>
+{% for entry in entries %}
+<item>
+  <title>{{ escape(entry.title) }}</title>
+  <link>http://{{ request.host }}/{{ entry.slug }}</link>
+  <pubDate>{{ entry.published.strftime(date_format) }}</pubDate>
+  <description><![CDATA[{{ entry.info }}]]></description>
+  <content:encoded><![CDATA[{{ entry.code }}]]>
+                   <![CDATA[{{ entry.info }}]]>
+  </content:encoded>
+</item>
+{% end %}
+</channel>
+</rss>

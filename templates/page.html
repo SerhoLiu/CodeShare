@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+<title>{% block title %}第{{  this }}页——{{ escape(handler.settings["sitename"]) }}{% end %}</title>
+{% block body %}
+
+<table class="bordered-table zebra-striped">
+        <thead>
+          <tr>
+            <th style="width: 30px;">序号</th>
+            <th style="width: 190px;">标题</th>
+            <th>介绍</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i,entry in enumerate(entries) %}
+          <tr>
+            <td>#{{i+(this-1)*8+1}}</td>
+            <td><a href="/{{ entry.slug }}">{{entry.title[ :100]}}</a></td>
+            <td>{{entry.info}}</td>
+          </tr>
+          {% end %}
+        </tbody>
+      </table>
+  <div></div>
+ <div class="pagination">
+  <ul>
+    {% if pages>11 %}
+   
+{% if this<7 %}
+    {% if this==2 %}
+        <li class="prev"><a href="/">&larr; Previous</a></li>
+    {% else %}
+        <li class="prev"><a href="/page/{{this-1}}">&larr; Previous</a></li>
+    {% end %}
+    {% for i in range(this,this+5) %}
+        {% if i==this %}
+            <li class="active"><a href="/page/{{ i}}">{{i}}</a></li>
+        {% elif i==1 %}
+            <li><a href="/">{{i}}</a></li>
+        {% else %}
+            <li><a href="/page/{{i}}">{{i}}</a></li>
+        {% end %}
+    {% end %}
+    {% if this==6 %}
+    <li><a href="/page/11">11</a></li>
+    {% else %}
+        <li class="disabled"><a href="#">...</a></li>
+    {% end %}
+    
+    {% for i in range(pages-4,pages+1) %}
+         <li><a href="/page/{{i}}">{{i}}</a></li>
+    {% end %}
+    <li class="next"><a href="/page/{{this+1}}">Next &rarr;</a></li>   
+{% else %}
+    <li class="prev"><a href="/page/{{this-1}}">&larr; Previous</a></li>
+    {% for i in range(pages-11,pages) %}
+        {% if i+1==this %}
+            <li class="active"><a href="/page/{{i+1}}">{{i+1}}</a></li>
+        {% elif i==0 %}
+            <li><a href="/">{{i+1}}</a></li>
+        {% else %}
+            <li><a href="/page/{{i+1}}">{{i+1}}</a></li>
+        {% end %}
+    {% end %}
+    {% if this==pages %}
+        <li class="next disabled"><a href="#">Next &rarr;</a></li>
+    {% else %}
+        <li class="next"><a href="/page/{{this+1}}">Next &rarr;</a></li>
+    {% end %}
+{% end %}
+{% else %}
+    {% if this==2 %}
+        <li class="prev"><a href="/">&larr; Previous</a></li>
+    {% else %}
+        <li class="prev"><a href="/page/{{this-1}}">&larr; Previous</a></li>
+    {% end %}
+    {% for i in range(pages) %}
+        {% if i+1==this %}
+            <li class="active"><a href="/page/{{i+1}}">{{i+1}}</a></li>
+        {% elif i==0 %}
+            <li><a href="/">{{i+1}}</a></li>
+        {% else %}
+            <li><a href="/page/{{i+1}}">{{i+1}}</a></li>
+        {% end %}
+    {% end %}
+    {% if this==pages %}
+        <li class="next disabled"><a href="#">Next &rarr;</a></li>
+    {% else %}
+        <li class="next"><a href="/page/{{this+1}}">Next &rarr;</a></li>
+    {% end %}
+{% end %}
+  </ul>
+</div>
+{% end %}

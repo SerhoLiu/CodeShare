@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 26
+/tosae/!svn/ver/460/1/apps
+END
+admin.py
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/tosae/!svn/ver/375/1/apps/admin.py
+END
+code.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/tosae/!svn/ver/460/1/apps/code.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/tosae/!svn/ver/11/1/apps/__init__.py
+END

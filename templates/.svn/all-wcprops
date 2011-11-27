@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/tosae/!svn/ver/457/1/templates
+END
+page.html
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/tosae/!svn/ver/454/1/templates/page.html
+END
+start.html
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/tosae/!svn/ver/352/1/templates/start.html
+END
+feed.xml
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/tosae/!svn/ver/385/1/templates/feed.xml
+END
+entry.html
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/tosae/!svn/ver/383/1/templates/entry.html
+END
+compose.html
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/tosae/!svn/ver/352/1/templates/compose.html
+END
+home.html
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/tosae/!svn/ver/452/1/templates/home.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/tosae/!svn/ver/372/1/templates/login.html
+END
+base.html
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/tosae/!svn/ver/457/1/templates/base.html
+END

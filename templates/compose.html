@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+<title>{% block title %}发布代码——Code Share{% end %}</title>
+{% block body %}
+  <form action="{{ request.path }}" method="post" class="compose">
+  <fieldset>
+  <legend>发布分享代码</legend>
+          <div class="clearfix">
+            <label for="xlInput3">代码标题</label>
+            <div class="input">
+              <input name="title" type="text" id="title" class="span4" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">一些说明</label>
+            <div class="input">
+              <textarea name="info" class="xxlarge span10" id="textarea2" name="textarea2" rows="3"></textarea>
+              <span class="help-block">
+                支持Markdown语法，请参考：<a href="http://daringfireball.net/projects/markdown/basics" target=_blank>#</a>
+              </span>
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">输入代码</label>
+            <div class="input">
+              <textarea name="code" class="xxlarge span10" id="textarea3" name="textarea2" rows="30"></textarea>
+              
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">管理密码</label>
+            <div class="input">
+              <input name="password" type="password" class="span4" id="pswd" />
+              <span class="help-block">
+                提交后不能修改，但可以通过管理密码删除。
+              </span>
+            </div>
+          </div><!-- /clearfix -->
+       <div class="actions">
+            <input type="submit" class="btn primary" value="提交代码">&nbsp;
+            <a href="/"><button type="reset" class="btn">放弃提交</button></a>
+      </div>
+  </fieldset>
+    </div>
+    {{ xsrf_form_html() }}
+  </form>
+{% end %}
+
+{% block bottom %}
+
+  <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+
+    $(function() {
+      $("input[name=title]").select();
+      $("form.compose").submit(function() {
+          var required = ["title","textarea2","textarea3","pswd"];
+          var form = $(this).get(0);
+          for (var i = 0; i < required.length; i++) {
+              if (!form[required[i]].value) {
+                  $(form[required[i]]).select();
+                  return false;
+              }
+          }
+          return true;
+      });
+    });
+
+  //]]>
+  </script>
+{% end %}
+
