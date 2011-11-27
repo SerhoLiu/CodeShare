@@ -2,7 +2,7 @@
   <title>{% block title %}{{ entry.title }}——{{ escape(handler.settings["sitename"]) }}{% end %}</title>
 {% block head %}
   <link rel="stylesheet" href="{{ static_url("prettify.css") }}" type="text/css" />
-  <meta name="description" content="{{ entry.info[0:128] }}">
+  <meta name="description" content="{{ escape(entry.info[0:128]) }}">
 {% end %}
 
 {% block body %}

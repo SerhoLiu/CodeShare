@@ -5,7 +5,7 @@
     <title> {% block title %}{{ escape(handler.settings["sitename"]) }}{% end %}</title>
     <link rel="stylesheet" href="{{ static_url("bootstrap.min.css") }}" />
     <link rel="stylesheet" href="{{ static_url("blog.css") }}" type="text/css" />
-    <link rel="alternate" href="/feed" type="application/atom+xml" title="Tosae Blog" />
+    <link rel="alternate" href="/feed" type="application/atom+xml" title="{{ escape(handler.settings["sitename"]) }}" />
     {% block head %}<meta name="description" content="代码分享">{% end %}
   </head>
   
@@ -14,7 +14,7 @@
     <div class="container">
       <div class="header box clearfix">
         <div class="hright">
-          <a href="/compose"><button class="btn success">New Code</button></a>
+          <a href="/newcode"><button class="btn success">New Code</button></a>
         </div>
         <div class="hleft box">
           <h1><a href="/">{{ escape(handler.settings["sitename"]) }}</a></h1>
