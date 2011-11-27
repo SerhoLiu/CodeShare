@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import datetime
 from libs import markdown
 import tornado.database
 import tornado.web
@@ -88,8 +89,8 @@ class ComposeHandler(BaseHandler):
         slug = "zzzzzzzz"
         self.db.execute(
                 "INSERT INTO entries (password,title,slug,code,info,"
-                "published) VALUES (%s,%s,%s,%s,%s,UTC_TIMESTAMP())",
-                 password, title, slug, code, info)
+                "published) VALUES (%s,%s,%s,%s,%s,%s)",
+                 password, title, slug, code, info, datetime.datetime.now())
         e = self.db.get("SELECT * FROM entries WHERE slug = %s", slug)
         eid = e.id
         slug = eid
