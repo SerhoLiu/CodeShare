@@ -88,9 +88,9 @@ class ComposeHandler(BaseHandler):
         password = hexuserpass(pswd)
         slug = "zzzzzzzz"
         self.db.execute(
-                "INSERT INTO entries (password,title,slug,code,info,"
-                "published) VALUES (%s,%s,%s,%s,%s,%s)",
-                 password, title, slug, code, info, datetime.datetime.now())
+                "INSERT INTO entries (password,title,slug,code,info,markdown,"
+                "published) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+                 password, title, slug, code, info, tep, datetime.datetime.now())
         e = self.db.get("SELECT * FROM entries WHERE slug = %s", slug)
         eid = e.id
         slug = eid
@@ -110,3 +110,47 @@ class DeleteHandler(BaseHandler):
             self.redirect("/")
         else:
             self.redirect("/"+str(id))
+
+class UserLoginHandler(BaseHandler):
+    
+    def post(self):
+        password = self.get_argument("password")
+        id = self.get_argument("id")
+        e = self.db.get("SELECT * FROM entries WHERE id = %s", int(id))
+        if checkuserpass(password,e["password"]):
+            self.set_secure_cookie("codeid", str(id))
+            self.redirect("/update/"+str(id))
+        else:
+            self.redirect("/"+str(id))    
+    
+    
+class UpdateHandler(BaseHandler):
+    
+    def get(self,codeid):
+        id = self.get_secure_cookie("codeid")
+        if str(codeid)==str(id):
+            code = self.db.get("SELECT * FROM entries WHERE id = %s", int(id))
+            self.render("update.html",code=code)
+        else:
+            self.redirect("/"+str(codeid))
+            
+    def post(self,codeid):
+        
+        title = xhtml_escape(self.get_argument("title"))
+        tep = self.get_argument("info") 
+        code = xhtml_escape(self.get_argument("code"))
+        pswd = self.get_argument("password")
+        info = md.convert(tep)
+        codes = self.db.get("SELECT * FROM entries WHERE id = %s", int(codeid))
+        if checkuserpass(pswd,codes["password"]):
+            self.db.execute(
+                    "UPDATE entries SET title = %s, info = %s, code = %s, markdown = %s "
+                    "WHERE id = %s", title, info, code, tep,  int(codeid))
+            self.clear_cookie("codeid")
+            self.redirect("/"+str(codeid))
+        else:
+            self.redirect("/"+str(codeid))
+                
+                
+                
+                
