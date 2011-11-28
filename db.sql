@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `entries` (
   `slug` varchar(100) NOT NULL,
   `title` varchar(512) NOT NULL,
   `info` mediumtext NOT NULL,
+  `markdown` mediumtext NOT NULL,
   `code` mediumtext NOT NULL,
   `published` datetime NOT NULL,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

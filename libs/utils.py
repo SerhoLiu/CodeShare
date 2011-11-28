@@ -12,7 +12,7 @@ def hexuserpass(password):
 def checkuserpass(passwd,enpass):
     password = hexuserpass(passwd)
     if password==enpass:
-        return Ture
+        return True
     else:
         return False
 
