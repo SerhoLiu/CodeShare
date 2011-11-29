@@ -14,8 +14,8 @@
           {% for i,entry in enumerate(entries) %}
           <tr>
             <td>#{{i+(this-1)*8+1}}</td>
-            <td><a href="/{{ entry.slug }}">{{entry.title[ :100]}}</a></td>
-            <td>{{entry.info}}</td>
+            <td><a href="/{{ entry.slug }}">{{entry.title}}</a></td>
+            <td>{{entry.info[ :100]}}</td>
           </tr>
           {% end %}
         </tbody>

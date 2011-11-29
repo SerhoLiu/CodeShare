@@ -7,23 +7,23 @@
           <div class="clearfix">
             <label for="xlInput3">代码标题</label>
             <div class="input">
-              <input name="title" type="text" id="title" class="span4" value="{{ code.title }}" />
+              <input name="title" type="text" id="title" class="span7" value="{{ code.title }}" />
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="xlInput3">贴入代码</label>
+            <div class="input">
+              <textarea name="code" class="xxlarge span10" id="textarea3" name="textarea2" rows="10">{{ code.code }}</textarea>
+              
             </div>
           </div><!-- /clearfix -->
           <div class="clearfix">
             <label for="xlInput3">一些说明</label>
             <div class="input">
-              <textarea name="info" class="xxlarge span10" id="textarea2" name="textarea2" rows="3">{{ code.markdown }}</textarea>
+              <textarea name="info" class="xxlarge span10" id="textarea2" name="textarea2" rows="20">{{ code.markdown }}</textarea>
               <span class="help-block">
                 支持Markdown语法，请参考：<a href="http://daringfireball.net/projects/markdown/basics" target=_blank>#</a>
               </span>
-            </div>
-          </div><!-- /clearfix -->
-          <div class="clearfix">
-            <label for="xlInput3">输入代码</label>
-            <div class="input">
-              <textarea name="code" class="xxlarge span10" id="textarea3" name="textarea2" rows="30">{{ code.code }}</textarea>
-              
             </div>
           </div><!-- /clearfix -->
           <div class="clearfix">
