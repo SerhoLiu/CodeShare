@@ -8,7 +8,7 @@ import tornado.web
 from tornado.escape import xhtml_escape
 
 import sae.const
-from libs.utils import hexuserpass,checkuserpass
+from libs.utils import hexuserpass, checkuserpass
 from settings import db
 
 md = markdown.Markdown(safe_mode=True)
@@ -34,14 +34,14 @@ class HomeHandler(BaseHandler):
         results = self.db.query("SELECT COUNT(*) As code FROM entries")
         navnum = 8
         count = results[0].code
-        if count % navnum==0:
+        if count % navnum == 0:
             pages = count / navnum
         else:
             pages = count / navnum + 1
         if not entries:
             self.redirect("/newcode")
             return
-        self.render("home.html", entries=entries,pages=pages)
+        self.render("home.html", entries=entries,pages=pages, counts=count)
 
 class PageHandler(BaseHandler):
 
@@ -49,14 +49,14 @@ class PageHandler(BaseHandler):
         navnum = 8
         results = self.db.query("SELECT COUNT(*) As code FROM entries")
         count = results[0].code
-        if count % navnum==0:
+        if count % navnum == 0:
             pages = count / navnum
         else:
             pages = count / navnum + 1
         offset = (int(id)-1) * navnum
         entries = self.db.query("SELECT * FROM entries ORDER BY published "
                                 "DESC LIMIT 8 OFFSET %s",offset)
-        self.render("page.html",entries=entries,pages = pages,this=int(id))
+        self.render("page.html",entries=entries,pages = pages,this=int(id), counts=count)
 
 class EntryHandler(BaseHandler):
     def get(self, slug):
@@ -84,6 +84,12 @@ class ComposeHandler(BaseHandler):
         tep = self.get_argument("info") 
         code = xhtml_escape(self.get_argument("code"))
         pswd = self.get_argument("password")
+
+        check = self.get_argument("check", None)
+        if check != "1984":
+            self.redirect("/newcode")
+            return
+
         info = md.convert(tep)
         password = hexuserpass(pswd)
         slug = "zzzzzzzz"

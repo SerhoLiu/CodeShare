@@ -12,7 +12,7 @@
         <tbody>
           {% for i,entry in enumerate(entries) %}
           <tr>
-            <td>#{{i+1}}</td>
+            <td>#{{counts-i}}</td>
             <td><a href="/{{ entry.slug }}">{{entry.title}}</a></td>
             <td>{{entry.info[ :100]}}</td>
           </tr>

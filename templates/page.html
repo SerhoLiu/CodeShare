@@ -13,7 +13,7 @@
         <tbody>
           {% for i,entry in enumerate(entries) %}
           <tr>
-            <td>#{{i+(this-1)*8+1}}</td>
+            <td>#{{counts-(this-1)*8-i}}</td>
             <td><a href="/{{ entry.slug }}">{{entry.title}}</a></td>
             <td>{{entry.info[ :100]}}</td>
           </tr>
