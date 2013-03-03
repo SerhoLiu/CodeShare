@@ -6,21 +6,21 @@ import random
 
 
 def hexuserpass(password):
+    """
+    加密使用者发布代码时的密码，所以使用最简单的加密方法
+    """
     enpass = sha1(password.encode('utf-8')).hexdigest()
     return enpass
 
 
 def checkuserpass(passwd, enpass):
     password = hexuserpass(passwd)
-    if password == enpass:
-        return True
-    else:
-        return False
+    return (password == enpass)
 
 
 def hexpassword(password):
     """
-    加密密码
+    加密管理员密码，就目前来说，这个加密强度也太弱了，可以考虑使用 `pbkdf2` 加密方法
     """
     seed = "1234567890abcdefghijklmnopqrstuvwxyz   \
             ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-"
@@ -36,7 +36,4 @@ def checkpassword(passwd, enpass):
     salt = enpass[:8]
     password = sha1(sha1((salt + passwd).encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()
     p = str(salt) + '$' + str(password)
-    if p == enpass:
-        return True
-    else:
-        return False
+    return (p == enpass)
