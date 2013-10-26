@@ -22,9 +22,10 @@ class SiteStartHandler(BaseHandler):
     	
         if pswd1 != pswd2:
             self.redirect("/admin/start")
-            password = hexpassword(pswd1)
-            self.db.execute(
-                "INSERT INTO users (password,email) VALUES (%s,%s)", password, email)
+            return
+        password = hexpassword(pswd1)
+        self.db.execute(
+            "INSERT INTO users (password,email) VALUES (%s,%s)", password, email)
         self.redirect("/auth/login")
 
 
